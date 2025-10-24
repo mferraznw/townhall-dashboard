@@ -79,7 +79,7 @@ class ApiClient {
   private baseUrl: string;
   private accessToken: string | null = null;
 
-  constructor(baseUrl: string = API_BASE_URL) {
+  constructor(baseUrl: string = API_BASE_URL || '') {
     this.baseUrl = baseUrl;
   }
 
