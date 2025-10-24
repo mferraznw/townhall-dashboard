@@ -2,6 +2,9 @@
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 const FUNCTION_KEY = process.env.NEXT_PUBLIC_FUNCTION_KEY;
 
+console.log('API_BASE_URL:', API_BASE_URL);
+console.log('FUNCTION_KEY:', FUNCTION_KEY ? 'SET' : 'UNDEFINED');
+
 export interface ChatQuery {
   question: string;
   context?: string;
