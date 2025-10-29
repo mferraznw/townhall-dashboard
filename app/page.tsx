@@ -33,7 +33,7 @@ export default function Home() {
       try {
         // Fetch data from dedicated endpoints
         const [utterances, speakers, trends] = await Promise.all([
-          apiClient.getUtterances({ top: '50' }), // Request only 50 utterances for metrics
+          apiClient.getUtterances(), // Request all utterances for complete metrics
           apiClient.getSpeakers(),
           apiClient.getTrends()
         ]);
@@ -241,7 +241,7 @@ export default function Home() {
                           <p className="text-sm text-gray-600">{trend.description}</p>
                         </div>
                         <div className="text-right">
-                          <p className="text-sm font-medium text-gray-900">{trend.meetings_count} meetings</p>
+                          <p className="text-sm font-medium text-gray-900">{trend.meetings_count} utterances</p>
                           <p className="text-xs text-gray-500">
                             {(trend.avg_sentiment * 100).toFixed(1)}% sentiment
                           </p>
@@ -271,14 +271,14 @@ export default function Home() {
                   </div>
                 ) : (
                   <div className="space-y-4">
-                    {speakersData?.results?.slice(0, 5).map((speaker, index) => (
+                    {speakersData?.results?.filter(speaker => !speaker.display_name.toLowerCase().includes('moderator')).slice(0, 5).map((speaker, index) => (
                       <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                         <div>
                           <p className="font-medium text-gray-900">{speaker.display_name}</p>
                           <p className="text-sm text-gray-600">{speaker.department} • {speaker.region}</p>
                         </div>
                         <div className="text-right">
-                          <p className="text-sm font-medium text-gray-900">{speaker.mentions} mentions</p>
+                          <p className="text-sm font-medium text-gray-900">{speaker.mentions} utterances</p>
                           <p className="text-xs text-gray-500">
                             {(speaker.avg_sentiment * 100).toFixed(1)}% sentiment
                           </p>
