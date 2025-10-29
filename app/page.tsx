@@ -33,7 +33,7 @@ export default function Home() {
       try {
         // Fetch data from dedicated endpoints
         const [utterances, speakers, trends] = await Promise.all([
-          apiClient.getUtterances(), // Request all utterances for complete metrics
+          apiClient.getUtterances({ top: '10000' }), // Request all utterances for complete metrics
           apiClient.getSpeakers(),
           apiClient.getTrends()
         ]);
